@@ -1,0 +1,57 @@
+{
+  "name": "taskpaw",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "prisma migrate deploy && nuxt start",
+    "dev:docker": "prisma generate && prisma migrate dev && nuxt",
+    "generate": "nuxt generate",
+    "lint:js": "eslint --ext \".js,.ts,.vue\" --ignore-path .gitignore .",
+    "lint": "yarn lint:js",
+    "lintfix": "yarn lint:js --fix"
+  },
+  "dependencies": {
+    "@nuxtjs/auth-next": "^5.0.0-1648802546.c9880dc",
+    "@nuxtjs/axios": "^5.13.6",
+    "@prisma/client": "4.4.0",
+    "body-parser": "^1.20.0",
+    "canvas-confetti": "^1.6.0",
+    "cookie-parser": "^1.4.6",
+    "core-js": "^3.19.3",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "googleapis": "^108.0.0",
+    "humanize-duration": "^3.27.2",
+    "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^3.1.2",
+    "moment": "^2.29.4",
+    "nuxt": "^2.15.8",
+    "vue": "^2.6.14",
+    "vue-js-modal": "^2.0.1",
+    "vue-server-renderer": "^2.6.14",
+    "vue-template-compiler": "^2.6.14",
+    "vuedraggable": "^2.24.3",
+    "vuejs-datepicker": "^1.6.2",
+    "vuex-persist": "^3.1.3",
+    "webpack": "^4.46.0"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.16.3",
+    "@nuxt/types": "^2.15.8",
+    "@nuxt/typescript-build": "^2.1.0",
+    "@nuxtjs/eslint-config-typescript": "^8.0.0",
+    "@nuxtjs/eslint-module": "^3.0.2",
+    "@nuxtjs/pwa": "^3.3.5",
+    "@nuxtjs/tailwindcss": "^4.2.1",
+    "eslint": "^8.4.1",
+    "eslint-plugin-nuxt": "^3.1.0",
+    "eslint-plugin-vue": "^8.2.0",
+    "postcss": "^8.4.4",
+    "prisma": "^4.4.0"
+  },
+  "engines": {
+    "node": "16"
+  }
+}

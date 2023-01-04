@@ -1,0 +1,88 @@
+<template>
+  <div>
+    <client-only>
+      <date-picker ref="programaticOpen" v-model="dateModel" input-class="vdp-date-input" @closed="handleCalenderClose" />
+    </client-only>
+    <div v-show="isDateLoaded" class="relative flex flex-row align-items-center">
+      <div v-if="isDateToday" class="mr-2">
+        Today
+      </div>
+      <div class="text-gray-500">
+        {{ dateString }}<div />
+      </div>
+      <div class="mt-1 ml-2 cursor-pointer md:absolute md:-ml-8" @click="openPicker">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20"><g
+          fill="none"
+          fill-rule="evenodd"
+          stroke="#200E32"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
+        ><line x1=".093" x2="17.917" y1="7.404" y2="7.404" /><line x1="13.442" x2="13.451" y1="11.31" y2="11.31" /><line x1="9.005" x2="9.014" y1="11.31" y2="11.31" /><line x1="4.558" x2="4.567" y1="11.31" y2="11.31" /><line x1="13.442" x2="13.451" y1="15.196" y2="15.196" /><line x1="9.005" x2="9.014" y1="15.196" y2="15.196" /><line x1="4.558" x2="4.567" y1="15.196" y2="15.196" /><line x1="13.044" x2="13.044" y2="3.291" /><line x1="4.966" x2="4.966" y2="3.291" /><path d="M13.2382655,1.57919622 L4.77096342,1.57919622 C1.83427331,1.57919622 0,3.21513002 0,6.22222222 L0,15.2718676 C0,18.3262411 1.83427331,20 4.77096342,20 L13.2290015,20 C16.1749556,20 18,18.3546099 18,15.3475177 L18,6.22222222 C18.0092289,3.21513002 16.1842196,1.57919622 13.2382655,1.57919622 Z" /></g></svg>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import moment from 'moment'
+export default {
+  name: 'DateHeading',
+  data () {
+    return {
+      dateModel: new Date(),
+      isCalendarOpen: false
+    }
+  },
+  computed: {
+    dateString () {
+      const momentToday = moment(this.$store.getters['ui/selectedDate'])
+      return `${momentToday.format('ddd')} ${momentToday.date()} ${momentToday.format('MMM')}`
+    },
+    isDateToday () {
+      return this.$store.getters['ui/isDateToday']
+    },
+    isDateLoaded () {
+      return this.$store.getters['ui/isDateLoaded']
+    }
+  },
+  watch: {
+    dateModel (newDate) {
+      this.$store.commit('ui/setSelectedDate', newDate)
+      this.$store.dispatch('tasks/fetchTasks')
+    }
+  },
+  beforeMount () {
+    this.$store.commit('ui/setSelectedDate', moment().startOf('day'))
+    this.$store.commit('ui/setIsDateLoaded', true)
+  },
+  beforeDestroy () {
+    this.documentClosePicker()
+  },
+  methods: {
+    openPicker () {
+      document.removeEventListener('click', this.documentClosePicker)
+      this.$refs.programaticOpen.showCalendar()
+      this.isCalendarOpen = true
+      setTimeout(() => {
+        document.addEventListener('click', this.documentClosePicker)
+      }, 500)
+    },
+    documentClosePicker (event) {
+      if (!this.isCalendarOpen || this.$refs.programaticOpen.$el.contains(event.target)) { return }
+      this.isCalendarOpen = false
+      document.removeEventListener('click', this.documentClosePicker)
+      this.$refs?.programaticOpen?.showCalendar()
+    },
+    handleCalenderClose () {
+      this.isCalendarOpen = false
+    }
+  }
+}
+</script>
+
+<style>
+.vdp-date-input {
+  display: none;
+}
+</style>
