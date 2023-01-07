@@ -13,7 +13,7 @@
     "lintfix": "yarn lint:js --fix"
   },
   "dependencies": {
-    "@nuxtjs/auth-next": "^5.0.0-1648802546.c9880dc",
+    "@nuxtjs/auth-next": "^5.0.0-1667386184.dfbbb54",
     "@nuxtjs/axios": "^5.13.6",
     "@prisma/client": "4.4.0",
     "body-parser": "^1.20.0",
