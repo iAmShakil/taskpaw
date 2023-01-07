@@ -13,6 +13,8 @@
 Implements cutting-edge research in psychology that are proven to be helpful in boosting productivity.
 </p>
 
+![taskpaw-demo-gif](https://user-images.githubusercontent.com/7998860/211167385-4fdd74bd-0ee0-4073-828b-80bc0c86f9c5.gif)
+
 # Trying out
 ## Compatible node versions
 Tested in node v14 and v16
