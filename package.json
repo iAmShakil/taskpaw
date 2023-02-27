@@ -16,7 +16,7 @@
     "@nuxtjs/auth-next": "^5.0.0-1648802546.c9880dc",
     "@nuxtjs/axios": "^5.13.6",
     "@prisma/client": "4.4.0",
-    "body-parser": "^1.20.0",
+    "body-parser": "^1.20.2",
     "canvas-confetti": "^1.6.0",
     "cookie-parser": "^1.4.6",
     "core-js": "^3.19.3",
